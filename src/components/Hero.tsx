@@ -17,6 +17,7 @@ export const Hero = () => {
           <Button 
             size="lg" 
             className="cta-button bg-blue-500 hover:bg-blue-600 transform hover:scale-105 transition-all duration-300"
+            onClick={() => window.location.href = '/pricing'}
           >
             Get Started Now
             <ArrowRight className="ml-2 h-5 w-5" />

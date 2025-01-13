@@ -2,10 +2,9 @@ import { User } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 
 const teamMembers = [
-  { name: "Doro", role: "Lead Developer" },
-  { name: "Micha", role: "Security Expert" },
-  { name: "Vanessa", role: "Support Lead" },
-  { name: "Ekrem", role: "System Administrator" }
+  { name: "Ibra", role: "Founder + Developer" },
+  { name: "Diego", role: "Head Developer and Co-founder" },
+  { name: "Chris", role: "Founder + Backend Dev" }
 ];
 
 export const TeamSection = () => {
@@ -20,7 +19,7 @@ export const TeamSection = () => {
             Expert professionals dedicated to your game's security
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {teamMembers.map((member, index) => (
             <Card key={index} className="bg-gray-800/50 border-gray-700 hover:bg-gray-800/70 transition-colors">
               <CardHeader>

@@ -1,4 +1,5 @@
 import { Shield, Brain, Bell, LayoutDashboard, Ban } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 
 const features = [
   {
@@ -30,20 +31,31 @@ const features = [
 
 export const Features = () => {
   return (
-    <section className="py-20 bg-gray-900">
+    <section className="py-20 bg-gray-900/80">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-          Powerful Features
+          Advanced Protection Features
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card">
-              <div className="flex flex-col items-center text-center">
-                <feature.icon className="h-12 w-12 text-blue-500 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-blue-100/80">{feature.description}</p>
-              </div>
-            </div>
+            <Card 
+              key={index} 
+              className="bg-gray-800/50 border-gray-700 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
+            >
+              <CardHeader>
+                <div className="w-16 h-16 mx-auto bg-blue-500/10 rounded-full flex items-center justify-center mb-4">
+                  <feature.icon className="h-8 w-8 text-blue-500" />
+                </div>
+                <CardTitle className="text-center text-white">
+                  {feature.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-center text-blue-100/80">
+                  {feature.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

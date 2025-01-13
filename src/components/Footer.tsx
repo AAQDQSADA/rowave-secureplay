@@ -10,7 +10,7 @@ export const Footer = () => {
             <p className="text-gray-400">Protecting Roblox Games Worldwide</p>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Links</h4>
+            <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">Contact Us</a></li>
               <li><a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">Support</a></li>
@@ -18,7 +18,7 @@ export const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Social</h4>
+            <h4 className="text-lg font-semibold text-white mb-4">Connect</h4>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">
                 <Github className="h-6 w-6" />

@@ -8,6 +8,7 @@ import Pricing from "./pages/Pricing";
 import KeyGenerator from "./pages/KeyGenerator";
 import Documentation from "./pages/Documentation";
 import RandomGenerator from "./pages/RandomGenerator";
+import ProtectedGames from "./pages/ProtectedGames";
 import { Chatbot } from "./components/Chatbot";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/key-generator" element={<KeyGenerator />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/random-generator" element={<RandomGenerator />} />
+          <Route path="/protected-games" element={<ProtectedGames />} />
         </Routes>
         <Chatbot />
       </BrowserRouter>

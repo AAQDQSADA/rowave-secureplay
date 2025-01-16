@@ -40,6 +40,8 @@ const RESPONSES = {
   }
 };
 
+const HARMFUL_KEYWORDS = ["hack", "exploit", "bypass", "crack", "steal", "malicious"];
+
 export const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ text: string; isBot: boolean }[]>([
@@ -47,8 +49,28 @@ export const Chatbot = () => {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+
+  const checkForHarmfulContent = (message: string) => {
+    return HARMFUL_KEYWORDS.some(keyword => 
+      message.toLowerCase().includes(keyword)
+    );
+  };
 
   const generateResponse = async (userMessage: string) => {
+    if (!isVerified && !userMessage.startsWith("HTMQ")) {
+      return "Please enter the verification code 'HTMQ' before your message to continue.";
+    }
+
+    if (userMessage.startsWith("HTMQ")) {
+      setIsVerified(true);
+      return "Verification successful! How can I assist you today?";
+    }
+
+    if (checkForHarmfulContent(userMessage)) {
+      return "I apologize, but I cannot assist with potentially harmful or malicious requests. Is there something else I can help you with?";
+    }
+
     const lowercaseMessage = userMessage.toLowerCase();
     
     // Check for exact matches first
@@ -58,9 +80,9 @@ export const Chatbot = () => {
       }
     }
     
-    // Check for keyword matches
+    // Generate a more natural response based on keywords
     let bestMatch = {
-      response: "I apologize, but I'm not sure about that. Could you try rephrasing your question or ask about our features, pricing, security, or support?",
+      response: "",
       matchCount: 0
     };
 
@@ -75,6 +97,11 @@ export const Chatbot = () => {
           matchCount
         };
       }
+    }
+
+    // If no good match is found, provide a more natural response
+    if (bestMatch.matchCount === 0) {
+      return "I understand you're asking about " + userMessage + ". Could you please provide more specific details about what you'd like to know? I can help with information about our features, pricing, security measures, or support options.";
     }
 
     return bestMatch.response;
@@ -172,7 +199,7 @@ export const Chatbot = () => {
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
+                  placeholder={isVerified ? "Type your message..." : "Enter HTMQ followed by your message..."}
                   className="flex-1"
                   disabled={isLoading}
                 />

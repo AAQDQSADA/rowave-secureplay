@@ -1,27 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Shield, Users, Ban, Clock, Activity } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { toast } from "sonner";
-import { Copy, RefreshCw } from "lucide-react";
 import { Footer } from "@/components/Footer";
 
 const ProtectedGames = () => {
-  const [gameId, setGameId] = useState("");
+  const [lastDetection, setLastDetection] = useState("");
+  const [detectionCount, setDetectionCount] = useState(0);
 
-  const generateGameId = () => {
-    const prefix = "RW";
-    const timestamp = Date.now().toString(36);
-    const random = Math.random().toString(36).substring(2, 8).toUpperCase();
-    const newGameId = `${prefix}-${timestamp}-${random}`;
-    setGameId(newGameId);
-    toast.success("New Game ID generated!");
-  };
+  useEffect(() => {
+    // Simulate real-time detections
+    const interval = setInterval(() => {
+      const now = new Date();
+      setLastDetection(now.toLocaleTimeString());
+      setDetectionCount(prev => prev + Math.floor(Math.random() * 3));
+    }, 5000);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(gameId);
-    toast.success("Game ID copied to clipboard!");
-  };
+    return () => clearInterval(interval);
+  }, []);
+
+  const stats = [
+    {
+      title: "Active Players",
+      value: "1,234",
+      icon: Users,
+      description: "Currently protected",
+      color: "text-blue-500",
+    },
+    {
+      title: "Cheaters Banned",
+      value: detectionCount.toString(),
+      icon: Ban,
+      description: "Last 24 hours",
+      color: "text-red-500",
+    },
+    {
+      title: "Response Time",
+      value: "12ms",
+      icon: Clock,
+      description: "Average detection speed",
+      color: "text-green-500",
+    },
+    {
+      title: "Protection Score",
+      value: "99.9%",
+      icon: Activity,
+      description: "System efficiency",
+      color: "text-purple-500",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-blue-900">
@@ -32,79 +59,66 @@ const ProtectedGames = () => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-            Protected Games Registry
-          </h1>
-          
-          <Card className="bg-gray-800/50 border-gray-700 mb-8">
+          <div className="text-center mb-12">
+            <Shield className="w-16 h-16 mx-auto text-blue-500 mb-4" />
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Protected by ROWAVE ANTICHEAT
+            </h1>
+            <p className="text-xl text-blue-200">
+              Advanced protection system actively monitoring your game
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="bg-gray-800/50 border-gray-700 hover:bg-gray-800/70 transition-all duration-300">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-white">{stat.title}</CardTitle>
+                      <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-3xl font-bold text-white mb-2">
+                      {stat.value}
+                    </div>
+                    <p className="text-blue-200">{stat.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader>
-              <CardTitle className="text-2xl text-white text-center">
-                Game ID Generator
-              </CardTitle>
+              <CardTitle className="text-white">Live Protection Status</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="bg-gray-700/50 p-6 rounded-lg text-center">
-                <p className="text-xl font-mono text-blue-300 break-all">
-                  {gameId || "Click generate to create a new Game ID"}
-                </p>
-              </div>
-              
-              <div className="flex gap-4 justify-center">
-                <Button
-                  onClick={generateGameId}
-                  className="bg-blue-500 hover:bg-blue-600 gap-2"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                  Generate ID
-                </Button>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-gray-700/30 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                    <span className="text-white">System Active</span>
+                  </div>
+                  <span className="text-blue-200">All systems operational</span>
+                </div>
                 
-                <Button
-                  onClick={copyToClipboard}
-                  disabled={!gameId}
-                  className="bg-green-500 hover:bg-green-600 gap-2"
-                >
-                  <Copy className="w-4 h-4" />
-                  Copy ID
-                </Button>
+                <div className="flex items-center justify-between p-4 bg-gray-700/30 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                    <span className="text-white">Last Detection</span>
+                  </div>
+                  <span className="text-blue-200">{lastDetection || "Monitoring..."}</span>
+                </div>
               </div>
             </CardContent>
           </Card>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-xl text-white">
-                  How It Works
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-blue-100/80 space-y-4">
-                <p>Each Game ID is unique and includes:</p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>RoWave prefix (RW)</li>
-                  <li>Timestamp-based identifier</li>
-                  <li>Random alphanumeric sequence</li>
-                  <li>Automatic validation system</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-xl text-white">
-                  Security Features
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-blue-100/80 space-y-4">
-                <p>Your Game ID provides access to:</p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Real-time protection</li>
-                  <li>Automated threat detection</li>
-                  <li>24/7 monitoring</li>
-                  <li>Instant security alerts</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
         </motion.div>
       </div>
       <Footer />

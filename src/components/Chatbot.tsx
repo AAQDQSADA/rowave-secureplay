@@ -5,6 +5,41 @@ import { MessageCircle, Send, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 
+const RESPONSES = {
+  pricing: {
+    keywords: ["price", "cost", "pricing", "subscription", "plan", "payment"],
+    response: "We offer three plans: Basic ($9.99/mo), Pro ($19.99/mo), and Enterprise (custom pricing). Each plan includes different levels of protection and features. Would you like to know more about a specific plan?",
+  },
+  security: {
+    keywords: ["secure", "security", "protection", "safe", "protect"],
+    response: "RoWave uses industry-leading security measures including AI-driven analysis, real-time monitoring, and automated threat detection. Our system processes over 1M+ security events daily with a 99.9% accuracy rate.",
+  },
+  features: {
+    keywords: ["feature", "capabilities", "can", "do", "what"],
+    response: "RoWave offers comprehensive game protection features including: \n• Event Security\n• AI-Driven Analysis\n• Real-Time Alerts\n• Admin Dashboard\n• Automated Bans\n• Live Protection Status",
+  },
+  support: {
+    keywords: ["help", "support", "contact", "assistance", "reach"],
+    response: "Our support team is available 24/7! You can reach us through:\n• Email: support@rowave.com\n• Discord: discord.gg/rowave\n• Documentation: docs.rowave.com",
+  },
+  games: {
+    keywords: ["game", "protect", "roblox", "protection"],
+    response: "RoWave protects over 2,500+ games across different genres. We support all types of Roblox games and offer specialized protection for different game mechanics.",
+  },
+  stats: {
+    keywords: ["statistics", "numbers", "users", "active"],
+    response: "RoWave currently protects:\n• 50,000+ Active Users\n• 1,000,000+ Threats Blocked\n• 2,500+ Games Protected\n• 99.9% Accuracy Rate",
+  },
+  team: {
+    keywords: ["team", "company", "who", "people"],
+    response: "Our expert team includes:\n• Ibra (Founder + Developer)\n• Diego (Head Developer)\n• Chris (Backend Dev)\nAll dedicated to providing the best game security solutions.",
+  },
+  greeting: {
+    keywords: ["hi", "hello", "hey", "morning", "afternoon", "evening"],
+    response: "Hello! I'm the RoWave Assistant. I'm here to help you with any questions about our game protection services. What would you like to know?",
+  }
+};
+
 export const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ text: string; isBot: boolean }[]>([
@@ -14,28 +49,35 @@ export const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const generateResponse = async (userMessage: string) => {
-    // This is a simple response generation logic
-    // In production, you would connect this to a real AI service
-    const keywords = {
-      "pricing": "We offer three plans: Basic ($9.99/mo), Pro ($19.99/mo), and Enterprise (custom pricing). Check our pricing page for more details!",
-      "license": "You can generate a license key in our Key Generator page. Each key is unique and secure.",
-      "features": "RoWave offers secure key generation, real-time validation, and usage analytics. Visit our documentation for the full feature list.",
-      "support": "We provide 24/7 support through this chat assistant and email support@rowave.com",
-      "security": "We use industry-standard encryption and security practices to protect your keys and data.",
+    const lowercaseMessage = userMessage.toLowerCase();
+    
+    // Check for exact matches first
+    for (const category of Object.values(RESPONSES)) {
+      if (category.keywords.some(keyword => lowercaseMessage === keyword)) {
+        return category.response;
+      }
+    }
+    
+    // Check for keyword matches
+    let bestMatch = {
+      response: "I apologize, but I'm not sure about that. Could you try rephrasing your question or ask about our features, pricing, security, or support?",
+      matchCount: 0
     };
 
-    let response = "I apologize, but I'm not sure about that. Could you try rephrasing your question?";
-    
-    for (const [key, value] of Object.entries(keywords)) {
-      if (userMessage.toLowerCase().includes(key)) {
-        response = value;
-        break;
+    for (const category of Object.values(RESPONSES)) {
+      const matchCount = category.keywords.filter(keyword => 
+        lowercaseMessage.includes(keyword)
+      ).length;
+
+      if (matchCount > bestMatch.matchCount) {
+        bestMatch = {
+          response: category.response,
+          matchCount
+        };
       }
     }
 
-    return new Promise<string>(resolve => {
-      setTimeout(() => resolve(response), 1000);
-    });
+    return bestMatch.response;
   };
 
   const handleSend = async () => {

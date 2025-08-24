@@ -7,7 +7,7 @@ import { TeamSection } from "@/components/TeamSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-blue-900">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-purple-900">
       <Hero />
       <Statistics />
       <Features />

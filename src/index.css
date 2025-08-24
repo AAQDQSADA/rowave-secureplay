@@ -12,7 +12,7 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 83% 53%;
+    --primary: 280 100% 60%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -24,7 +24,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
+    --ring: 280 100% 60%;
     --radius: 0.5rem;
   }
 
@@ -37,7 +37,7 @@
   }
 
   .hero-gradient {
-    background: linear-gradient(90deg, rgb(23, 37, 84) 0%, rgb(30, 58, 138) 100%);
+    background: linear-gradient(90deg, rgb(74, 20, 140) 0%, rgb(139, 69, 219) 100%);
   }
 
   .feature-card {
@@ -50,7 +50,7 @@
 
   .glow-effect::before {
     content: '';
-    @apply absolute inset-0 bg-blue-500/20 blur-xl opacity-0 transition-opacity duration-300;
+    @apply absolute inset-0 bg-purple-500/20 blur-xl opacity-0 transition-opacity duration-300;
   }
 
   .glow-effect:hover::before {
@@ -58,8 +58,8 @@
   }
 
   .cta-button {
-    @apply px-8 py-3 bg-blue-500 text-white rounded-lg font-semibold 
-           transition-all duration-300 hover:bg-blue-600 hover:scale-105 
-           hover:shadow-lg hover:shadow-blue-500/25;
+    @apply px-8 py-3 bg-purple-500 text-white rounded-lg font-semibold 
+           transition-all duration-300 hover:bg-purple-600 hover:scale-105 
+           hover:shadow-lg hover:shadow-purple-500/25;
   }
 }

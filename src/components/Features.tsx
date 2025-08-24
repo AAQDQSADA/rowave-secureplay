@@ -43,15 +43,15 @@ export const Features = () => {
               className="bg-gray-800/50 border-gray-700 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
             >
               <CardHeader>
-                <div className="w-16 h-16 mx-auto bg-blue-500/10 rounded-full flex items-center justify-center mb-4">
-                  <feature.icon className="h-8 w-8 text-blue-500" />
+                <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-full flex items-center justify-center mb-4">
+                  <feature.icon className="h-8 w-8 text-purple-500" />
                 </div>
                 <CardTitle className="text-center text-white">
                   {feature.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-center text-blue-100/80">
+                <p className="text-center text-purple-100/80">
                   {feature.description}
                 </p>
               </CardContent>

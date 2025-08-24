@@ -9,10 +9,10 @@ export const Hero = () => {
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-            PROTECT YOUR GAME TODAY.
+            DETECT ALTS INSTANTLY.
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 mb-12">
-            Advanced Anti-Cheat System Exclusively for Roblox Games
+            Advanced Alt Detection System for Roblox Games
           </p>
           <Button 
             size="lg" 

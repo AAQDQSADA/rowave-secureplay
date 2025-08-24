@@ -28,7 +28,7 @@ const ProtectedGames = () => {
       color: "text-blue-500",
     },
     {
-      title: "Cheaters Banned",
+      title: "Alts Detected",
       value: detectionCount.toString(),
       icon: Ban,
       description: "Last 24 hours",
@@ -62,10 +62,10 @@ const ProtectedGames = () => {
           <div className="text-center mb-12">
             <Shield className="w-16 h-16 mx-auto text-blue-500 mb-4" />
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Protected by ROWAVE ANTICHEAT
+              Protected by Linkify
             </h1>
             <p className="text-xl text-blue-200">
-              Advanced protection system actively monitoring your game
+              Advanced alt detection system actively monitoring your game
             </p>
           </div>
 
@@ -97,7 +97,7 @@ const ProtectedGames = () => {
 
           <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader>
-              <CardTitle className="text-white">Live Protection Status</CardTitle>
+              <CardTitle className="text-white">Live Detection Status</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">

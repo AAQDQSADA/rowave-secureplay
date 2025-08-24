@@ -62,7 +62,7 @@ const ProtectedGames = () => {
           <div className="text-center mb-12">
             <Shield className="w-16 h-16 mx-auto text-blue-500 mb-4" />
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Protected by Linkify
+              Protected by Linkifx
             </h1>
             <p className="text-xl text-blue-200">
               Advanced alt detection system actively monitoring your game
